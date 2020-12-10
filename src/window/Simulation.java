@@ -87,10 +87,20 @@ public class Simulation {
 		this.rValue=this.selectedV.getrFac();
 		this.dailyInfected = new int [this.testPeriod];
 		this.deathRate=this.selectedV.getkFac();
-		this.selfHealingRate = 0;
+		this.selfHealingRate= this.selectedV.getCureRate();
 		//
 		initPerson = new Person(1, null);
 		initPerson.setDay(0);
+		//Test
+		double rate = calculateRate(noBarriersRate, impactOfMasks, impactOfQuarantine, socialDistance);
+	    calculateInfectedCount(initPerson, averageContact, testPeriod, rate, deathRate, selfHealingRate);
+	    rValue = calculateRValue(averageContact, testPeriod);
+	    
+	    for (int i = 0; i < dailyInfected.length; i++) {
+			System.out.println(i + " days: " + dailyInfected[i]);
+		}
+	    
+	    
 	}
 	
 	public int[] getDailyInfected() {
@@ -164,10 +174,10 @@ public class Simulation {
 	
 	public double calculateRValue(int averageContact, int testPeriod) {
 		int totalPerson = 1;
-		int dailyIncrease = averageContact + 1;//每个人每天都传播 所以加上自己
+		int dailyIncrease = averageContact + 1;
 		for (int i = 0; i < testPeriod; i++) {
 			totalPerson += dailyIncrease;
-			totalPerson -= dailyIncrease/(averageContact+1);//减去重复的自己
+			totalPerson -= dailyIncrease/(averageContact+1);
 			dailyIncrease =	dailyIncrease * (averageContact + 1);
 		}
 		return this.infectedCount / totalPerson;
@@ -184,15 +194,29 @@ public class Simulation {
 		shell.open();
 		shell.layout();
 		while (!shell.isDisposed()) {
+		    refreashP();
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
 	}
-
+	public void  refreashP() {
+		String dailyString="";
+		for(int i=0;i<dailyInfected.length;i++)
+		{
+			dailyString=dailyString+dailyInfected[i]+" "+"\n";
+		}
+		data.setText(dailyString);
+		String dayString="";
+		for (int i = 0; i < selectedC.getSimulationDay(); i++) {
+			dayString=dayString+(i+1)+" "+"\n";
+		}
+		day.setText(dayString);
+	}
 	/**
 	 * Create contents of the window.
 	 */
+	
 	protected void createContents() {
 		shell = new Shell();
 		shell.setSize(450, 300);
@@ -202,21 +226,11 @@ public class Simulation {
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				String dailyString="";
-				for(int i=0;i<dailyInfected.length;i++)
-				{
-					dailyString=dailyString+dailyInfected[i]+" "+"\n";
-				}
-				data.setText(dailyString);
-				String dayString="";
-				for (int i = 0; i < selectedC.getSimulationDay(); i++) {
-					dayString=dayString+(i+1)+" "+"\n";
-				}
-				day.setText(dayString);
+				shell.close();
 			}
 		});
 		btnNewButton.setBounds(331, 225, 80, 27);
-		btnNewButton.setText("New Button");
+		btnNewButton.setText("back");
 		
 		Label lblV = new Label(shell, SWT.NONE);
 		lblV.setBounds(29, 10, 80, 17);
@@ -231,29 +245,19 @@ public class Simulation {
 		lblP.setText(this.selectedP.getPName());
 		
 		data = new Label(shell, SWT.NONE);
-		data.setBounds(155, 36, 113, 177);
+		data.setBounds(155, 36, 113, 216);
 		data.setText("sdf");
 		
 		day = new Label(shell, SWT.NONE);
-		day.setBounds(25, 33, 113, 177);
+		day.setBounds(25, 33, 113, 219);
 		day.setText("New Label");
 		
 		//dailyInfected
 		btnNewButton.addPaintListener( new PaintListener() {
 			  @Override
 			  public void paintControl( PaintEvent event ) {
-			    event.gc.setBackground( event.display.getSystemColor( SWT.COLOR_GREEN ) );
-			    event.gc.fillRectangle( event.x, event.y, event.width, event.height );
-			    Image image = event.display.getSystemImage( SWT.ICON_QUESTION );
-			    event.gc.drawImage( image, 0, 0 );
-			    //
-			    double rate = calculateRate(noBarriersRate, impactOfMasks, impactOfQuarantine, socialDistance);
-			    calculateInfectedCount(initPerson, averageContact, testPeriod, rate, deathRate, selfHealingRate);
-			    rValue = calculateRValue(averageContact, testPeriod);
-			    
-			    for (int i = 0; i < dailyInfected.length; i++) {
-					System.out.println(i + " days: " + dailyInfected[i]);
-				}
+			   
+			 
 			  }
 			} );
 		

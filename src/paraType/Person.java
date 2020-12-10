@@ -1,6 +1,6 @@
 package paraType;
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.DayDV;
+//import com.sun.org.apache.xerces.internal.impl.dv.xs.DayDV;
 
 public class Person {
 	private int isinfected; //0 - safe 1 - infected 2- dead

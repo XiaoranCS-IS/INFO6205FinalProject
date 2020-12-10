@@ -39,9 +39,10 @@ public class WelcomeWin {
 		shell.open();
 		shell.layout();
 		int alpha=0;
-	    shell.setAlpha(0);//tou ming du
+	    shell.setAlpha(0);
 	    
 	    Button btnSiM = new Button(shell, SWT.NONE);
+	    btnSiM.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 	    btnSiM.addSelectionListener(new SelectionAdapter() {
 	    	@Override
 	    	public void widgetSelected(SelectionEvent e) {
@@ -92,6 +93,7 @@ public class WelcomeWin {
 		lblNewLabel.setBounds(0, 0, 644, 133);
 		//btnNewButton_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		Button btnNewButton_2 = new Button(shell, SWT.NONE);
+		btnNewButton_2.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnNewButton_2.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -102,6 +104,7 @@ public class WelcomeWin {
 		btnNewButton_2.setText("Exit");
 		
 		Button btnNewButton_3 = new Button(shell, SWT.NONE);
+		btnNewButton_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnNewButton_3.setBounds(250, 302, 128, 41);
 		btnNewButton_3.setText("Designer");
 		//lblNewLabel.setText("New Label");

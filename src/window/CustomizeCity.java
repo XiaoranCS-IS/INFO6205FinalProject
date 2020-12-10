@@ -20,7 +20,6 @@ public class CustomizeCity {
 	protected Shell shell;
 	private Text textCity;
 	private Text textAverageContect;
-	private Text textSimulationDay;
 	public City c;
 	/**
 	 * Open the window.
@@ -47,7 +46,7 @@ public class CustomizeCity {
 		City city = new City();
 		city.setCityName(this.textCity.getText());
 		city.setDensity(Double.valueOf(this.textAverageContect.getText()));
-		city.setSimulationDay(Double.valueOf(this.textSimulationDay.getText()));
+		city.setSimulationDay(10);//default
 		return city;	
 	}
 
@@ -67,18 +66,11 @@ public class CustomizeCity {
 		lblNewLabel_4.setText("Average contact(1-5):");
 		lblNewLabel_4.setBounds(26, 83, 126, 17);
 		
-		Label Hospital = new Label(shell, SWT.NONE);
-		Hospital.setText("Simulation day(2-10):");
-		Hospital.setBounds(26, 135, 126, 17);
-		
 		textCity = new Text(shell, SWT.BORDER);
 		textCity.setBounds(26, 54, 73, 23);
 		
 		textAverageContect = new Text(shell, SWT.BORDER);
 		textAverageContect.setBounds(26, 106, 73, 23);
-		
-		textSimulationDay = new Text(shell, SWT.BORDER);
-		textSimulationDay.setBounds(26, 158, 73, 23);
 		
 		Button ButtonFinish = new Button(shell, SWT.NONE);
 		ButtonFinish.addSelectionListener(new SelectionAdapter() {
@@ -88,12 +80,12 @@ public class CustomizeCity {
 				boolean can2=false;
 				try {
 					double a = Double.valueOf(textAverageContect.getText());
-					double b = Double.valueOf(textSimulationDay.getText());
+					
 					can1=true;
-					if(a<1 ||a>5 ||b>12||b<2) {
+					if(a<1 ||a>5 ) {
 						MessageBox mBox2= new MessageBox(shell, SWT.ICON_ERROR);
 						mBox2.setText("Unaccepted Range");
-						mBox2.setMessage("Average Contect must in Range(1-5)\nSimulationDay must in range(2-12)");
+						mBox2.setMessage("Average Contect must in Range(1-5)");
 						mBox2.open();
 					}else {
 						can2=true;
