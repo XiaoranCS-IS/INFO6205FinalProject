@@ -29,7 +29,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 public class Simulation {
 
-	protected Shell shell;
+	protected Shell shlSpreadOfVirus;
 	private Virus selectedV;
 	private Country selectedC;
 	private Policy selectedP;
@@ -93,7 +93,7 @@ public class Simulation {
 		this.policyChangeDay=(int) this.selectedC.getPolicyChangeDay();
 		this.rValue=this.selectedV.getrFac();
 		this.kValue = this.selectedV.getkFac();
-		this.dailyInfected = new int [this.testPeriod];
+		this.dailyInfected = new int [this.testPeriod+1];
 		this.dailytotal = new int [this.testPeriod+1];
 		this.deathRate=this.selectedV.getDeathRate();
 		this.selfHealingRate= this.selectedV.getCureRate();
@@ -103,7 +103,7 @@ public class Simulation {
 		initPerson.setDay(0);
 		//Test
 		double rate = calculateRate(noBarriersRate, impactOfMasks, impactOfQuarantine, socialDistance);
-	    calculateInfectedCount(initPerson, averageContact, testPeriod, rate, deathRate, selfHealingRate, kValue, policyChangeDay);
+	    calculateInfectedCountTimes(initPerson, averageContact, testPeriod, rate, deathRate, selfHealingRate, kValue, policyChangeDay);
 	    rValue = calculateRValue(averageContact, testPeriod);
 		
 	    for (int i = 0; i < dailyInfected.length; i++) {
@@ -184,7 +184,7 @@ public class Simulation {
 							
 							if (isInfected == 1 || isInfected == 3) {
 								this.infectedCount += 1;
-								this.dailyInfected[p.getDay()] += 1;
+								this.dailyInfected[p.getDay()+1] += 1;
 							}
 						}
 					}
@@ -216,6 +216,44 @@ public class Simulation {
 		return this.infectedCount;
 	}
 	
+	public void calculateInfectedCountTimes(Person p, int averageContact, int testPeriod, double rate,
+	double deathRate, double selfHealingRate, double kValue, int policyChangeDay) {
+		this.infectedCount = 1;//reset
+		int[] dailyInfectedTemp = new int [this.testPeriod+1];
+		int simulateTimes = 100;//simulate times
+		for (int k = 0; k < simulateTimes; k++) {
+			this.dailyInfected = new int [this.testPeriod+1];
+			this.dailytotal = new int [this.testPeriod+1];
+			this.dailytotal[0] = 1;
+			p = new Person(1, null);
+			p.setDay(0);
+			simulateProcess(p, averageContact, testPeriod, rate, deathRate, selfHealingRate, kValue, policyChangeDay);
+			
+			
+			for(int i=0;i<dailyInfected.length;i++)
+			{
+				dailyInfectedTemp[i] += this.dailyInfected[i];
+			}
+		}
+		
+		for (int i = 0; i < dailyInfected.length; i++) {
+			System.out.println(dailyInfectedTemp[i]);
+			this.dailyInfected[i] = dailyInfectedTemp[i] / simulateTimes;
+		}
+		
+		this.dailytotal = new int [this.testPeriod+1];
+		int total=0;
+		for (int i = 0; i < dailyInfected.length; i++) {
+			dailytotal[i] = total + dailyInfected[i];
+			total = dailytotal[i];
+		}
+//		
+		for(int i=0;i<dailytotal.length;i++)
+		{
+			dailytotal[i]++;//add the initial person 
+		}
+	}
+	
 	public double calculateRValue(int averageContact, int testPeriod) {
 		int totalPerson = 1;
 		int dailyIncrease = averageContact + 1;// include parent
@@ -235,9 +273,9 @@ public class Simulation {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlSpreadOfVirus.open();
+		shlSpreadOfVirus.layout();
+		while (!shlSpreadOfVirus.isDisposed()) {
 		    refreashP();
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -245,7 +283,7 @@ public class Simulation {
 		}
 	}
 	public void  refreashP() {
-		String dailyaddString="0"+"\n";
+		String dailyaddString="";
 		for(int i=0;i<dailyInfected.length;i++)
 		{
 			dailyaddString=dailyaddString+dailyInfected[i]+" "+"\n";
@@ -257,7 +295,7 @@ public class Simulation {
 		}
 		day.setText(dayString);
 		
-		String dailyString="1"+"\n";
+		String dailyString="";
 
 		for(int i=0;i<dailyInfected.length;i++)
 		{
@@ -270,21 +308,21 @@ public class Simulation {
 	 */
 	
 	protected void createContents() {
-		shell = new Shell();
-		shell.setSize(526, 379);
-		shell.setText("SWT Application");
+		shlSpreadOfVirus = new Shell();
+		shlSpreadOfVirus.setSize(526, 379);
+		shlSpreadOfVirus.setText("Spread of Virus");
 		
-		Button btnNewButton = new Button(shell, SWT.NONE);
+		Button btnNewButton = new Button(shlSpreadOfVirus, SWT.NONE);
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				shell.close();
+				shlSpreadOfVirus.close();
 			}
 		});
 		btnNewButton.setBounds(407, 293, 80, 38);
 		btnNewButton.setText("back");
 		
-		Label lblV = new Label(shell, SWT.NONE);
+		Label lblV = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblV.setBounds(29, 30, 110, 97);
 		lblV.setText("Virus : "+this.selectedV.getVirusName()+"\n"
 				+ "     K Factor  :"+this.selectedV.getkFac()
@@ -292,48 +330,48 @@ public class Simulation {
 				+"\n     Death Rate:"+this.selectedV.getDeathRate()
 				+"\n     Cure Rate :"+this.selectedV.getCureRate());
 		
-		Label lblC = new Label(shell, SWT.NONE);
+		Label lblC = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblC.setBounds(29, 224, 199, 51);
 		lblC.setText("Country : "+this.selectedC.getCountryName()+"\n     Average Contact  :"+this.selectedC.getDensity());
 		
-		Label lblP = new Label(shell, SWT.NONE);
+		Label lblP = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblP.setBounds(29, 133, 150, 97);
 		lblP.setText("Policy : "+this.selectedP.getPName()
 				+"\n     Mask Required  :"+this.selectedP.isIfMaskRequired()
 				+"\n     Social Distance  :"+this.selectedP.isIfsocialDistance()
 				+"\n     Quarantine  :"+this.selectedP.isIfTracingInfectedIndividual());
 		
-		data = new Label(shell, SWT.NONE);
+		data = new Label(shlSpreadOfVirus, SWT.NONE);
 		data.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		data.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		data.setBounds(407, 56, 65, 219);
 		data.setText("sdf");
 		
-		day = new Label(shell, SWT.NONE);
+		day = new Label(shlSpreadOfVirus, SWT.NONE);
 		day.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		day.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		day.setBounds(234, 56, 26, 219);
 		day.setText("New Label");
 		
-		Label lblPolicyChangeDay = new Label(shell, SWT.NONE);
+		Label lblPolicyChangeDay = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblPolicyChangeDay.setBounds(29, 293, 150, 17);
 		lblPolicyChangeDay.setText("Policy Change Day : "+this.selectedC.getPolicyChangeDay());
 		
-		Label lblDay = new Label(shell, SWT.NONE);
+		Label lblDay = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblDay.setBounds(234, 33, 59, 14);
 		lblDay.setText("Day:");
 		
-		Label lblNewLabel = new Label(shell, SWT.NONE);
+		Label lblNewLabel = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel.setBounds(288, 33, 104, 14);
 		lblNewLabel.setText("Total infected:");
 		
-		totaldata = new Label(shell, SWT.NONE);
+		totaldata = new Label(shlSpreadOfVirus, SWT.NONE);
 		totaldata.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		totaldata.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		totaldata.setBounds(303, 56, 59, 219);
 		totaldata.setText("New Label");
 		
-		Label lblNewLabel_2 = new Label(shell, SWT.NONE);
+		Label lblNewLabel_2 = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel_2.setBounds(398, 33, 92, 14);
 		lblNewLabel_2.setText("Daily infected:");
 		

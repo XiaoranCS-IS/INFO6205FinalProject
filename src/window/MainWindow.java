@@ -24,7 +24,7 @@ import org.eclipse.swt.layout.GridData;
 
 public class MainWindow {
 
-	protected  Shell shell;
+	protected  Shell shlSpreadOfVirus;
 	private Label VName2;
 	private Combo comboC;
 	private Combo comboV;
@@ -83,8 +83,8 @@ public class MainWindow {
 		p.setPName("StrictPolicy");
 		p2= new Policy(false,false,false);
 		p2.setPName("OpenPolicy");
-		v =new Virus("Covid-19",0.1,0.03,3,1);// death cure r k
-		v2 = new Virus("Sars",0.1,0.1,1,1);
+		v =new Virus("Covid-19",0.1,0.1,3,1);// death cure r k
+		v2 = new Virus("Sars",0.1,0.1,2,1);
 		// TODO Auto-generated constructor stub
 		ac.add(c);
 		ac.add(c2);
@@ -102,49 +102,49 @@ public class MainWindow {
 		Display display = Display.getDefault();
 		createContents();
 	    
-	    lblNewLabel_2 = new Label(shell, SWT.NONE);
+	    lblNewLabel_2 = new Label(shlSpreadOfVirus, SWT.NONE);
 	    lblNewLabel_2.setImage(SWTResourceManager.getImage("src/window/CHLA-What-You-Should-Know-Covid-19-1200x628-02.png"));
 	    lblNewLabel_2.setBounds(0, 0, 753, 94);
 	    
-	    Button btnNewButton = new Button(shell, SWT.NONE);
+	    Button btnNewButton = new Button(shlSpreadOfVirus, SWT.NONE);
 	    btnNewButton.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 	    btnNewButton.addSelectionListener(new SelectionAdapter() {
 	    	@Override
 	    	public void widgetSelected(SelectionEvent e) {
-	    		shell.close();
+	    		shlSpreadOfVirus.close();
 	    	}
 	    });
 	    btnNewButton.setBounds(590, 331, 107, 42);
 	    btnNewButton.setText("Exit");
 	    
-	    comboday = new Combo(shell, SWT.NONE);
+	    comboday = new Combo(shlSpreadOfVirus, SWT.NONE);
 	    comboday.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 	    comboday.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 	    comboday.setItems(new String[] {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"});
 	    comboday.setBounds(222, 401, 107, 25);
 	    
-	    Simulationday = new Label(shell, SWT.NONE);
+	    Simulationday = new Label(shlSpreadOfVirus, SWT.NONE);
 	    Simulationday.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 	    Simulationday.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 	    Simulationday.setBounds(222, 381, 123, 17);
 	    Simulationday.setText("Policy Change Day：");
 	    
-	    lblFactorK = new Label(shell, SWT.NONE);
+	    lblFactorK = new Label(shlSpreadOfVirus, SWT.NONE);
 	    lblFactorK.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 	    lblFactorK.setBounds(35, 381, 59, 14);
 	    lblFactorK.setText("Factor K:");
 	    
-	    lblFKL = new Label(shell, SWT.NONE);
+	    lblFKL = new Label(shlSpreadOfVirus, SWT.NONE);
 	    lblFKL.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 	    lblFKL.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 	    lblFKL.setBounds(35, 401, 103, 14);
 	    lblFKL.setText("Please Select a Virus");
-		shell.open();
+		shlSpreadOfVirus.open();
 		
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlSpreadOfVirus.layout();
+		while (!shlSpreadOfVirus.isDisposed()) {
 			this.refreshText();
-			shell.layout();
+			shlSpreadOfVirus.layout();
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -227,19 +227,19 @@ public class MainWindow {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell(SWT.CLOSE);
-		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		shell.setSize(752, 510);
-		shell.setText("SWT Application");
-		shell.setLayout(null);
+		shlSpreadOfVirus = new Shell(SWT.CLOSE);
+		shlSpreadOfVirus.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		shlSpreadOfVirus.setSize(752, 510);
+		shlSpreadOfVirus.setText("Spread of Virus");
+		shlSpreadOfVirus.setLayout(null);
 		
-		comboV = new Combo(shell, SWT.NONE);
+		comboV = new Combo(shlSpreadOfVirus, SWT.NONE);
 		comboV.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		comboV.setBounds(35, 121, 103, 22);
 		comboV.setItems(new String[] {"Covid-19","Sars"});
 		comboV.setText("Select Virus");
 		
-		ButtonCustomizeVirus = new Button(shell, SWT.NONE);
+		ButtonCustomizeVirus = new Button(shlSpreadOfVirus, SWT.NONE);
 		ButtonCustomizeVirus.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		ButtonCustomizeVirus.setBounds(590, 121, 107, 42);
 		ButtonCustomizeVirus.addSelectionListener(new SelectionAdapter() {
@@ -255,16 +255,16 @@ public class MainWindow {
 		});
 		ButtonCustomizeVirus.setText("New Virus");
 		
-		Label label = new Label(shell, SWT.SEPARATOR | SWT.VERTICAL);
+		Label label = new Label(shlSpreadOfVirus, SWT.SEPARATOR | SWT.VERTICAL);
 		label.setBounds(180, 108, 2, 290);
 		
-		comboC = new Combo(shell, SWT.NONE);
+		comboC = new Combo(shlSpreadOfVirus, SWT.NONE);
 		comboC.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		comboC.setBounds(222, 121, 115, 22);
 		comboC.setItems(new String[] {"US", "China"});
 		comboC.setText("Select Country");
 		
-		ButtonCustomizeCity = new Button(shell, SWT.NONE);
+		ButtonCustomizeCity = new Button(shlSpreadOfVirus, SWT.NONE);
 		ButtonCustomizeCity.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		ButtonCustomizeCity.setBounds(590, 191, 107, 42);
 		ButtonCustomizeCity.addSelectionListener(new SelectionAdapter() {
@@ -280,16 +280,16 @@ public class MainWindow {
 		});
 		ButtonCustomizeCity.setText("New Country");
 		
-		Label label_1 = new Label(shell, SWT.SEPARATOR | SWT.VERTICAL);
+		Label label_1 = new Label(shlSpreadOfVirus, SWT.SEPARATOR | SWT.VERTICAL);
 		label_1.setBounds(372, 108, 2, 290);
 		
-		comboP = new Combo(shell, SWT.NONE);
+		comboP = new Combo(shlSpreadOfVirus, SWT.NONE);
 		comboP.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		comboP.setBounds(417, 121, 103, 22);
 		comboP.setItems(new String[] {"OpenPolicy", "StrictPolicy"});
 		comboP.setText("Select Policy");
 		
-		ButtonCustomizePolicy = new Button(shell, SWT.NONE);
+		ButtonCustomizePolicy = new Button(shlSpreadOfVirus, SWT.NONE);
 		ButtonCustomizePolicy.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		ButtonCustomizePolicy.setBounds(590, 261, 107, 42);
 		ButtonCustomizePolicy.addSelectionListener(new SelectionAdapter() {
@@ -305,64 +305,64 @@ public class MainWindow {
 		});
 		ButtonCustomizePolicy.setText("New Policy");
 		
-		VName2 = new Label(shell, SWT.NONE);
+		VName2 = new Label(shlSpreadOfVirus, SWT.NONE);
 		VName2.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		VName2.setBounds(35, 180, 68, 17);
 		VName2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		VName2.setText("Virus Name:");
 		
-		Label lblNewLabel_3 = new Label(shell, SWT.NONE);
+		Label lblNewLabel_3 = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		lblNewLabel_3.setBounds(222, 180, 91, 17);
 		lblNewLabel_3.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel_3.setText("Country Name:");
 		
-		Label lblNewLabel_5 = new Label(shell, SWT.NONE);
+		Label lblNewLabel_5 = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel_5.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		lblNewLabel_5.setBounds(417, 180, 89, 17);
 		lblNewLabel_5.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel_5.setText("Mask Required:");
 		
-		lblVirusName = new Label(shell, SWT.NONE);
+		lblVirusName = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblVirusName.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblVirusName.setBounds(35, 202, 119, 17);
 		lblVirusName.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblVirusName.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblVirusName.setText("Please Select a Virus");
 		
-		lblCityName = new Label(shell, SWT.NONE);
+		lblCityName = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblCityName.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblCityName.setBounds(222, 200, 115, 17);
 		lblCityName.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblCityName.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblCityName.setText("Please Select a Country");
 		
-		lblMask = new Label(shell, SWT.NONE);
+		lblMask = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblMask.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblMask.setBounds(417, 200, 123, 17);
 		lblMask.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblMask.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblMask.setText("Please Select a Policy");
 		
-		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
+		Label lblNewLabel_1 = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		lblNewLabel_1.setBounds(35, 336, 68, 17);
 		lblNewLabel_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel_1.setText("Factor R:");
 		
-		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
+		Label lblNewLabel_4 = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel_4.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		lblNewLabel_4.setBounds(222, 283, 103, 17);
 		lblNewLabel_4.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel_4.setText("Average Contact:");
 		
-		Label lblNewLabel_6 = new Label(shell, SWT.NONE);
+		Label lblNewLabel_6 = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel_6.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		lblNewLabel_6.setBounds(417, 285, 118, 17);
 		lblNewLabel_6.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel_6.setText("Social Distance:");
 		
-		lblFR = new Label(shell, SWT.NONE);
+		lblFR = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblFR.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblFR.setBounds(35, 358, 119, 17);
 		lblFR.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -370,82 +370,82 @@ public class MainWindow {
 		lblFR.setText("Please Select a Virus");
 		
 		
-		lblDensity = new Label(shell, SWT.NONE);
+		lblDensity = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblDensity.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblDensity.setBounds(222, 305, 115, 17);
 		lblDensity.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblDensity.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblDensity.setText("Please Select a Country");
 		
-		lblBarrier = new Label(shell, SWT.NONE);
+		lblBarrier = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblBarrier.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblBarrier.setBounds(417, 305, 123, 17);
 		lblBarrier.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblBarrier.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblBarrier.setText("Please Select a Policy");
 		
-		Label lblNewLabel = new Label(shell, SWT.NONE);
+		Label lblNewLabel = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		lblNewLabel.setBounds(35, 231, 103, 17);
 		lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel.setText("Death Rate(0-1):");
 		
-		Label Cure = new Label(shell, SWT.NONE);
+		Label Cure = new Label(shlSpreadOfVirus, SWT.NONE);
 		Cure.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		Cure.setBounds(35, 283, 121, 17);
 		Cure.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		Cure.setText("Cure Rate(0-1):");
 		
-		lblDrl = new Label(shell, SWT.NONE);
+		lblDrl = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblDrl.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblDrl.setBounds(35, 253, 119, 17);
 		lblDrl.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblDrl.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblDrl.setText("Please Select a Virus");
 		
-		lblNumberOfHospital = new Label(shell, SWT.NONE);
+		lblNumberOfHospital = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNumberOfHospital.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblNumberOfHospital.setBounds(35, 305, 119, 17);
 		lblNumberOfHospital.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNumberOfHospital.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblNumberOfHospital.setText("Please Select a Virus");
 		
-		Label lblNewLabel_8 = new Label(shell, SWT.NONE);
+		Label lblNewLabel_8 = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel_8.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		lblNewLabel_8.setText("Quarantine:");
 		lblNewLabel_8.setBounds(417, 378, 154, 17);
 		lblNewLabel_8.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		
-		lblTrace = new Label(shell, SWT.NONE);
+		lblTrace = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblTrace.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblTrace.setBounds(417, 398, 123, 17);
 		lblTrace.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblTrace.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblTrace.setText("Please Select a Policy");
 		
-		Button simulationButton = new Button(shell, SWT.NONE);
+		Button simulationButton = new Button(shlSpreadOfVirus, SWT.NONE);
 		simulationButton.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		simulationButton.setBounds(590, 401, 107, 42);
 		simulationButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if(comboV.getSelectionIndex()==-1) {
-					MessageBox mBox= new MessageBox(shell, SWT.ICON_ERROR);
+					MessageBox mBox= new MessageBox(shlSpreadOfVirus, SWT.ICON_ERROR);
 					mBox.setText("Please Select");
 					mBox.setMessage("Please Select a Virus");
 					mBox.open();
 				}else if(comboC.getSelectionIndex()==-1) {
-					MessageBox mBox2= new MessageBox(shell, SWT.ICON_ERROR);
+					MessageBox mBox2= new MessageBox(shlSpreadOfVirus, SWT.ICON_ERROR);
 					mBox2.setText("Please Select");
 					mBox2.setMessage("Please Select a Country");
 					mBox2.open();
 				}else if(comboP.getSelectionIndex()==-1) {
-					MessageBox mBox3= new MessageBox(shell, SWT.ICON_ERROR);
+					MessageBox mBox3= new MessageBox(shlSpreadOfVirus, SWT.ICON_ERROR);
 					mBox3.setText("Please Select");
 					mBox3.setMessage("Please Select a Policy");
 					mBox3.open();
 				}else if(comboday.getSelectionIndex()==-1){
-					MessageBox mBox4= new MessageBox(shell, SWT.ICON_ERROR);
+					MessageBox mBox4= new MessageBox(shlSpreadOfVirus, SWT.ICON_ERROR);
 					mBox4.setText("Please Select");
 					mBox4.setMessage("Please Select Policy Change Days");
 					mBox4.open();

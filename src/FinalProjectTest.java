@@ -152,7 +152,7 @@ class FinalProjectTest {
 		int x = s.calculateInfectedCount(p, 2, 2, 1, 0, 0, 1, 0);
 		assertEquals(9, x, 1.0E-7);
 		double r = s.calculateRValue(2, 2);
-		assertEquals(1, r, 1.0E-7);
+		assertEquals(2, r, 1.0E-7);
 		
 		s = new Simulation(virus, country, policy);
 		p = new Person(1, null);
@@ -162,6 +162,6 @@ class FinalProjectTest {
 		x = s.calculateInfectedCount(p, 2, 2, 0, 0, 0, 1, 0);
 		assertEquals(1, x, 1.0E-7);
 		r = s.calculateRValue(2, 2);
-		assertEquals(1/9, r, 1.0E-7);
+		assertEquals(2/9, r, 1.0E-7);
 	}
 }

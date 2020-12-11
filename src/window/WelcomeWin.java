@@ -15,7 +15,7 @@ import org.eclipse.swt.events.SelectionEvent;
 
 public class WelcomeWin {
 
-	protected Shell shell;
+	protected Shell shlSpreadOfVirus;
 
 	/**
 	 * Launch the application.
@@ -36,12 +36,12 @@ public class WelcomeWin {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
+		shlSpreadOfVirus.open();
+		shlSpreadOfVirus.layout();
 		int alpha=0;
-	    shell.setAlpha(0);
+	    shlSpreadOfVirus.setAlpha(0);
 	    
-	    Button btnSiM = new Button(shell, SWT.NONE);
+	    Button btnSiM = new Button(shlSpreadOfVirus, SWT.NONE);
 	    btnSiM.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 	    btnSiM.addSelectionListener(new SelectionAdapter() {
 	    	@Override
@@ -49,7 +49,7 @@ public class WelcomeWin {
 	    		
 	    		try {
 					MainWindow window = new MainWindow();
-					shell.close();
+					shlSpreadOfVirus.close();
 					window.open();
 				} catch (Exception e2) {
 					e2.printStackTrace();
@@ -59,19 +59,19 @@ public class WelcomeWin {
 	    btnSiM.setBounds(250, 162, 128, 41);
 	    btnSiM.setText("Begin Simulation");
 	    
-	    Label lblDesigner = new Label(shell, SWT.NONE);
+	    Label lblDesigner = new Label(shlSpreadOfVirus, SWT.NONE);
 	    lblDesigner.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 	    lblDesigner.setBounds(180, 327, 301, 35);
 	    lblDesigner.setText("Designer：Xiaoran Li,  Chenghuan Li,  Ruizhe Zhang");
-	    while(shell.getAlpha()<255){
-		    shell.setAlpha(alpha++);
+	    while(shlSpreadOfVirus.getAlpha()<255){
+		    shlSpreadOfVirus.setAlpha(alpha++);
 		    try {
 		        Thread.sleep(1);
 		    } catch (InterruptedException e) {
 		        e.printStackTrace();
 		    }
 		}
-		while (!shell.isDisposed()) {
+		while (!shlSpreadOfVirus.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -83,26 +83,26 @@ public class WelcomeWin {
 	 */
 	protected void createContents() {
 		
-		shell = new Shell(SWT.CLOSE);
-		shell.setSize(640, 425);
-		shell.setImage(null);
-		shell.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		shell.setText("SWT Application");
+		shlSpreadOfVirus = new Shell(SWT.CLOSE);
+		shlSpreadOfVirus.setSize(640, 425);
+		shlSpreadOfVirus.setImage(null);
+		shlSpreadOfVirus.setBackground(SWTResourceManager.getColor(255, 255, 255));
+		shlSpreadOfVirus.setText("Spread of Virus");
 	//	shell.setLayout(new GridLayout(1, false));
 		
-		Button btnNewButton = new Button(shell, SWT.NONE);
+		Button btnNewButton = new Button(shlSpreadOfVirus, SWT.NONE);
 		btnNewButton.setText("New Button");
 		
-		Label lblNewLabel = new Label(shell, SWT.NONE);
+		Label lblNewLabel = new Label(shlSpreadOfVirus, SWT.NONE);
 		lblNewLabel.setImage(SWTResourceManager.getImage("src/window/wel.png"));
 		lblNewLabel.setBounds(0, 0, 644, 133);
 		//btnNewButton_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		Button btnNewButton_2 = new Button(shell, SWT.NONE);
+		Button btnNewButton_2 = new Button(shlSpreadOfVirus, SWT.NONE);
 		btnNewButton_2.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnNewButton_2.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				shell.close();
+				shlSpreadOfVirus.close();
 			}
 		});
 		btnNewButton_2.setBounds(250, 232, 128, 41);
