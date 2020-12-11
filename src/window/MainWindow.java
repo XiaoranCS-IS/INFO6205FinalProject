@@ -52,7 +52,6 @@ public class MainWindow {
 	private Button ButtonCustomizeVirus;
 	private Label lblMask;
 	private Label lblBarrier;
-	private Label lblTest;
 	private Label lblTrace;
 	private Button ButtonCustomizePolicy;
 	private Label lblNewLabel_2;
@@ -80,9 +79,9 @@ public class MainWindow {
 		//Test data
 		c= new Country("US",3,6);
 		c2 = new Country("China",5,6);
-		p= new Policy(true,true,true,true);
+		p= new Policy(true,true,true);
 		p.setPName("StrictPolicy");
-		p2= new Policy(false,false,false,false);
+		p2= new Policy(false,false,false);
 		p2.setPName("OpenPolicy");
 		v =new Virus("Covid-19",0.1,0.03,3,1);// death cure r k
 		v2 = new Virus("Sars",0.1,0.1,1,1);
@@ -131,6 +130,7 @@ public class MainWindow {
 	    Simulationday.setText("Policy Change Day：");
 	    
 	    lblFactorK = new Label(shell, SWT.NONE);
+	    lblFactorK.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 	    lblFactorK.setBounds(35, 381, 59, 14);
 	    lblFactorK.setText("Factor K:");
 	    
@@ -205,7 +205,6 @@ public class MainWindow {
 				if(comboP.getItem(comboP.getSelectionIndex()).equals(ap.get(i).getPName())) {
 					this.lblMask.setText(checkPolicy(ap.get(i).isIfMaskRequired()));
 					this.lblBarrier.setText(checkPolicy(ap.get(i).isIfsocialDistance()));
-					this.lblTest.setText(checkPolicy(ap.get(i).isIfTesting()));
 					this.lblTrace.setText(checkPolicy(ap.get(i).isIfTracingInfectedIndividual()));
 					this.selectedP=ap.get(i);
 				}
@@ -359,7 +358,7 @@ public class MainWindow {
 		
 		Label lblNewLabel_6 = new Label(shell, SWT.NONE);
 		lblNewLabel_6.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		lblNewLabel_6.setBounds(417, 254, 118, 17);
+		lblNewLabel_6.setBounds(417, 285, 118, 17);
 		lblNewLabel_6.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel_6.setText("Social Distance:");
 		
@@ -380,7 +379,7 @@ public class MainWindow {
 		
 		lblBarrier = new Label(shell, SWT.NONE);
 		lblBarrier.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
-		lblBarrier.setBounds(417, 274, 123, 17);
+		lblBarrier.setBounds(417, 305, 123, 17);
 		lblBarrier.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblBarrier.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblBarrier.setText("Please Select a Policy");
@@ -397,12 +396,6 @@ public class MainWindow {
 		Cure.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		Cure.setText("Cure Rate(0-1):");
 		
-		Label lblNewLabel_7 = new Label(shell, SWT.NONE);
-		lblNewLabel_7.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		lblNewLabel_7.setBounds(417, 316, 68, 17);
-		lblNewLabel_7.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNewLabel_7.setText("Test Virus:");
-		
 		lblDrl = new Label(shell, SWT.NONE);
 		lblDrl.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
 		lblDrl.setBounds(35, 253, 119, 17);
@@ -417,22 +410,15 @@ public class MainWindow {
 		lblNumberOfHospital.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblNumberOfHospital.setText("Please Select a Virus");
 		
-		lblTest = new Label(shell, SWT.NONE);
-		lblTest.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
-		lblTest.setBounds(417, 336, 123, 17);
-		lblTest.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTest.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblTest.setText("Please Select a Policy");
-		
 		Label lblNewLabel_8 = new Label(shell, SWT.NONE);
 		lblNewLabel_8.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		lblNewLabel_8.setText("Quarantine:");
-		lblNewLabel_8.setBounds(417, 381, 154, 17);
+		lblNewLabel_8.setBounds(417, 378, 154, 17);
 		lblNewLabel_8.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		
 		lblTrace = new Label(shell, SWT.NONE);
 		lblTrace.setFont(SWTResourceManager.getFont("Times New Roman", 11, SWT.NORMAL));
-		lblTrace.setBounds(417, 401, 123, 17);
+		lblTrace.setBounds(417, 398, 123, 17);
 		lblTrace.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblTrace.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblTrace.setText("Please Select a Policy");

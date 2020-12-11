@@ -63,7 +63,7 @@ public class CustomizeCountry {
 		lblNewLabel_3.setBounds(26, 31, 89, 17);
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
-		lblNewLabel_4.setText("Average contact(1-5):");
+		lblNewLabel_4.setText("Average Contact(1-5):");
 		lblNewLabel_4.setBounds(26, 83, 126, 17);
 		
 		textCity = new Text(shell, SWT.BORDER);

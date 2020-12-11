@@ -154,10 +154,8 @@ public class Simulation {
 				int isSelfHealing = getNumber(selfHealingRate);
 				if (isDead == 1) {// person dead, stop spread virus
 					p.setIsinfected(2);//set person dead status
-					System.out.println("###########");
 					this.infectedCount -= 1;
 					this.dailyInfected[p.getDay()] -= 1;
-					System.out.println(this.infectedCount);
 				}
 				else if (isSelfHealing == 1) {// person self-healing, stop spread virus
 					p.setIsinfected(0);//set person dead status
@@ -193,7 +191,6 @@ public class Simulation {
 					
 					for (Person person : p.getChildPerson()) {
 						person.setDay(p.getDay() + 1);
-						System.out.println(person.getDay() + "+" + person.getIsinfected());
 						simulateProcess(person, averageContact, testPeriod, rate, deathRate, selfHealingRate, kValue, policyChangeDay);
 					}
 				}
@@ -208,7 +205,7 @@ public class Simulation {
 			for(int j=0;j<dailyInfected.length;j++)
 			{
 				if(i>=j) {
-					this.dailytotal[i]+=this.dailyInfected[j];
+					this.dailytotal[i]+=this.dailyInfected[j];//count daily total infected person
 				}
 			}	
 		}
@@ -221,13 +218,13 @@ public class Simulation {
 	
 	public double calculateRValue(int averageContact, int testPeriod) {
 		int totalPerson = 1;
-		int dailyIncrease = averageContact + 1;
+		int dailyIncrease = averageContact + 1;// include parent
 		for (int i = 0; i < testPeriod; i++) {
 			totalPerson += dailyIncrease;
-			totalPerson -= dailyIncrease/(averageContact+1);
+			totalPerson -= dailyIncrease/(averageContact+1);// reduce repeated count person
 			dailyIncrease =	dailyIncrease * (averageContact + 1);
 		}
-		return this.infectedCount / totalPerson;
+		return this.infectedCount * averageContact / totalPerson;
 	}
 
 
@@ -304,7 +301,6 @@ public class Simulation {
 		lblP.setText("Policy : "+this.selectedP.getPName()
 				+"\n     Mask Required  :"+this.selectedP.isIfMaskRequired()
 				+"\n     Social Distance  :"+this.selectedP.isIfsocialDistance()
-				+"\n     Virus Test  :"+this.selectedP.isIfTesting()
 				+"\n     Quarantine  :"+this.selectedP.isIfTracingInfectedIndividual());
 		
 		data = new Label(shell, SWT.NONE);

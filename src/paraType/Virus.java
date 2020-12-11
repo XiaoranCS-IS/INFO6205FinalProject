@@ -2,10 +2,10 @@ package paraType;
 
 public class Virus {
 	private String VirusName;
-	private double CureRate;
-	private double DeathRate;
-	private double kFac;
-	private double rFac;
+	private double CureRate;// the rate of person self healing
+	private double DeathRate;//  the rate of person dead
+	private double kFac;// K value of virus
+	private double rFac;// R value of virus
 	
 	
 	public Virus() {

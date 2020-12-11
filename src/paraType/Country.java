@@ -2,8 +2,8 @@ package paraType;
 
 public class Country {
 	private String CountryName;
-	private double Density;//average contact
-	private double  PolicyChangeDay;//Policy Change day 
+	private double Density;//Average contact
+	private double  PolicyChangeDay;//Policy change day 
 	
 	
 	

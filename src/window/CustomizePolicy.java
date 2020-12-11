@@ -15,7 +15,6 @@ public class CustomizePolicy {
 	protected Shell shell;
 	Button btnCheckMask;
 	Button btnCheckBarrier;
-	Button btnCheckTest;
 	Button btnCheckTrace;
 	public Policy p;
 
@@ -54,7 +53,6 @@ public class CustomizePolicy {
 		Policy policy = new Policy();
 		policy.setIfMaskRequired(this.btnCheckMask.getSelection());
 		policy.setIfsocialDistance(this.btnCheckBarrier.getSelection());
-		policy.setIfTesting(this.btnCheckTest.getSelection());
 		policy.setIfTracingInfectedIndividual(this.btnCheckTrace.getSelection());
 		return policy;
 	}
@@ -77,12 +75,8 @@ public class CustomizePolicy {
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnCheckBarrier.setBounds(64, 74, 175, 17);
+		btnCheckBarrier.setBounds(64, 93, 175, 17);
 		btnCheckBarrier.setText("Social Distance Required");
-		
-		btnCheckTest = new Button(shell, SWT.CHECK);
-		btnCheckTest.setBounds(64, 114, 147, 17);
-		btnCheckTest.setText("Test Virus");
 		
 		btnCheckTrace = new Button(shell, SWT.CHECK);
 		btnCheckTrace.addSelectionListener(new SelectionAdapter() {

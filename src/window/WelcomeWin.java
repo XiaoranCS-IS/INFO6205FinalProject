@@ -60,6 +60,7 @@ public class WelcomeWin {
 	    btnSiM.setText("Begin Simulation");
 	    
 	    Label lblDesigner = new Label(shell, SWT.NONE);
+	    lblDesigner.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 	    lblDesigner.setBounds(180, 327, 301, 35);
 	    lblDesigner.setText("Designer：Xiaoran Li,  Chenghuan Li,  Ruizhe Zhang");
 	    while(shell.getAlpha()<255){

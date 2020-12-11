@@ -5,7 +5,6 @@ public class Policy {
 	private String PName;
 	private boolean ifMaskRequired;
 	private boolean ifsocialDistance;
-	private boolean ifTesting;
 	private boolean ifTracingInfectedIndividual;
 
 	
@@ -16,14 +15,13 @@ public class Policy {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Policy(boolean ifMaskRequired, boolean ifBarrierBetweenCity, boolean ifTesting,
+	public Policy(boolean ifMaskRequired, boolean ifBarrierBetweenCity,
 		boolean ifTracingInfectedIndividual) {
 		super();
 		count++;
 		this.PName="Policy"+count;
 		this.ifMaskRequired = ifMaskRequired;
 		this.ifsocialDistance = ifBarrierBetweenCity;
-		this.ifTesting = ifTesting;
 		this.ifTracingInfectedIndividual = ifTracingInfectedIndividual;
 
 	}
@@ -39,12 +37,6 @@ public class Policy {
 	}
 	public void setIfsocialDistance(boolean ifsocialDistance) {
 		this.ifsocialDistance = ifsocialDistance;
-	}
-	public boolean isIfTesting() {
-		return ifTesting;
-	}
-	public void setIfTesting(boolean ifTesting) {
-		this.ifTesting = ifTesting;
 	}
 	public boolean isIfTracingInfectedIndividual() {
 		return ifTracingInfectedIndividual;
