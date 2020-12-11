@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import paraType.City;
+import paraType.Country;
 import paraType.Person;
 import paraType.Policy;
 import paraType.Virus;
@@ -36,70 +36,130 @@ class FinalProjectTest {
 	@Test
 	void testCalculateInfectedCount() {
 		Virus virus = new Virus();
-		City city = new City();
+		Country country = new Country();
 		Policy policy = new Policy();
-		Simulation s = new Simulation(virus, city, policy);
+		Simulation s = new Simulation(virus, country, policy);
 		Person p = new Person(1, null);
 		p.setDay(0);
 		s.setDailyInfected(new int[2]);
-		int x = s.calculateInfectedCount(p, 2, 1, 1, 0, 0);
+		s.setNoBarriersRate(1);
+		int x = s.calculateInfectedCount(p, 2, 1, 1, 0, 0, 1, 0);
 		assertEquals(3, x, 1.0E-7);
 		
-		s = new Simulation(virus, city, policy);
+		s = new Simulation(virus, country, policy);
 		p = new Person(1, null);
 		p.setDay(0);
 		s.setDailyInfected(new int[2]);
-		x = s.calculateInfectedCount(p, 2, 1, 1, 1, 0); // 100% dead
-		assertEquals(1, x, 1.0E-7);
-		
-		s = new Simulation(virus, city, policy);
-		p = new Person(1, null);
-		p.setDay(0);
-		s.setDailyInfected(new int[2]);
-		x = s.calculateInfectedCount(p, 2, 1, 1, 0, 1); // 100% self-healing
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 1, 1, 1, 0, 1, 0); // 100% dead
 		assertEquals(0, x, 1.0E-7);
 		
-		s = new Simulation(virus, city, policy);
+		s = new Simulation(virus, country, policy);
 		p = new Person(1, null);
 		p.setDay(0);
 		s.setDailyInfected(new int[2]);
-		x = s.calculateInfectedCount(p, 2, 1, 0, 0, 0);
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 1, 1, 0, 1, 1, 0); // 100% self-healing
+		assertEquals(0, x, 1.0E-7);
+		
+		s = new Simulation(virus, country, policy);
+		p = new Person(1, null);
+		p.setDay(0);
+		s.setDailyInfected(new int[2]);
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 1, 0, 0, 0, 1, 0);
 		assertEquals(1, x, 1.0E-7);
 		
-		s = new Simulation(virus, city, policy);
+		s = new Simulation(virus, country, policy);
 		p = new Person(1, null);
 		p.setDay(0);
 		s.setDailyInfected(new int[2]);
-		x = s.calculateInfectedCount(p, 2, 2, 1, 0, 0);
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 2, 1, 0, 0, 1, 0);
 		assertEquals(9, x, 1.0E-7);
 		
-		s = new Simulation(virus, city, policy);
+		s = new Simulation(virus, country, policy);
 		p = new Person(1, null);
 		p.setDay(0);
 		s.setDailyInfected(new int[2]);
-		x = s.calculateInfectedCount(p, 2, 2, 0, 0, 0);
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 2, 1, 0, 0, 1, 0);// all person can spread virus
+		assertEquals(9, x, 1.0E-7);
+		
+		s = new Simulation(virus, country, policy);
+		p = new Person(1, null);
+		p.setDay(0);
+		s.setDailyInfected(new int[2]);
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 2, 1, 0, 0, 0, 0);// all person can not spread virus
+		assertEquals(5, x, 1.0E-7);
+		
+		s = new Simulation(virus, country, policy);
+		p = new Person(1, null);
+		p.setDay(0);
+		s.setDailyInfected(new int[2]);
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 2, 0, 0, 0, 1, 0);
 		assertEquals(1, x, 1.0E-7);
+		
+		//
+		s = new Simulation(virus, country, policy);
+		p = new Person(1, null);
+		p.setDay(0);
+		s.setDailyInfected(new int[2]);
+		s.setNoBarriersRate(0);
+		x = s.calculateInfectedCount(p, 2, 2, 1, 0, 0, 1, 0);// use policy
+		assertEquals(9, x, 1.0E-7);
+		
+		//
+		s = new Simulation(virus, country, policy);
+		p = new Person(1, null);
+		p.setDay(0);
+		s.setDailyInfected(new int[2]);
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 2, 0, 0, 0, 1, 0);// use policy
+		assertEquals(1, x, 1.0E-7);
+		
+		//
+		s = new Simulation(virus, country, policy);
+		p = new Person(1, null);
+		p.setDay(0);
+		s.setDailyInfected(new int[2]);
+		s.setNoBarriersRate(0);
+		x = s.calculateInfectedCount(p, 2, 2, 1, 0, 0, 1, 2);// do not use policy
+		assertEquals(1, x, 1.0E-7);
+		
+		//
+		s = new Simulation(virus, country, policy);
+		p = new Person(1, null);
+		p.setDay(0);
+		s.setDailyInfected(new int[2]);
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 2, 0, 0, 0, 1, 2);// do not use policy
+		assertEquals(9, x, 1.0E-7);
 	}
 	
 	@Test
 	void testCalculateRValue() {
 		Virus virus = new Virus();
-		City city = new City();
+		Country country = new Country();
 		Policy policy = new Policy();
-		Simulation s = new Simulation(virus, city, policy);
+		Simulation s = new Simulation(virus, country, policy);
 		Person p = new Person(1, null);
 		p.setDay(0);
 		s.setDailyInfected(new int[3]);
-		int x = s.calculateInfectedCount(p, 2, 2, 1, 0, 0);
+		s.setNoBarriersRate(1);
+		int x = s.calculateInfectedCount(p, 2, 2, 1, 0, 0, 1, 0);
 		assertEquals(9, x, 1.0E-7);
 		double r = s.calculateRValue(2, 2);
 		assertEquals(1, r, 1.0E-7);
 		
-		s = new Simulation(virus, city, policy);
+		s = new Simulation(virus, country, policy);
 		p = new Person(1, null);
 		p.setDay(0);
 		s.setDailyInfected(new int[3]);
-		x = s.calculateInfectedCount(p, 2, 2, 0, 0, 0);
+		s.setNoBarriersRate(1);
+		x = s.calculateInfectedCount(p, 2, 2, 0, 0, 0, 1, 0);
 		assertEquals(1, x, 1.0E-7);
 		r = s.calculateRValue(2, 2);
 		assertEquals(1/9, r, 1.0E-7);

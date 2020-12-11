@@ -9,18 +9,18 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import paraType.City;
+import paraType.Country;
 
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-public class CustomizeCity {
+public class CustomizeCountry {
 
 	protected Shell shell;
 	private Text textCity;
 	private Text textAverageContect;
-	public City c;
+	public Country c;
 	/**
 	 * Open the window.
 	 * @wbp.parser.entryPoint
@@ -37,16 +37,16 @@ public class CustomizeCity {
 		}
 	}
 
-	public CustomizeCity() {
+	public CustomizeCountry() {
 		super();
 
 			
 	}
-	public City creatCity(){
-		City city = new City();
-		city.setCityName(this.textCity.getText());
+	public Country creatCity(){
+		Country city = new Country();
+		city.setCountryName(this.textCity.getText());
 		city.setDensity(Double.valueOf(this.textAverageContect.getText()));
-		city.setSimulationDay(10);//default
+		city.setPolicyChangeDay(6);//default
 		return city;	
 	}
 
@@ -59,8 +59,8 @@ public class CustomizeCity {
 		shell.setText("SWT Application");
 		
 		Label lblNewLabel_3 = new Label(shell, SWT.NONE);
-		lblNewLabel_3.setText("City Name:");
-		lblNewLabel_3.setBounds(26, 31, 61, 17);
+		lblNewLabel_3.setText("Country Name:");
+		lblNewLabel_3.setBounds(26, 31, 89, 17);
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
 		lblNewLabel_4.setText("Average contact(1-5):");
@@ -93,7 +93,7 @@ public class CustomizeCity {
 				} catch (Exception e1) {
 					MessageBox mBox3= new MessageBox(shell, SWT.ICON_ERROR);
 					mBox3.setText("Wrong Type");
-					mBox3.setMessage("Average Contect and Simulation Days must be the number");
+					mBox3.setMessage("Average Contect must be the number");
 					mBox3.open();
 					// TODO: handle exception
 				}

@@ -3,7 +3,7 @@ package paraType;
 //import com.sun.org.apache.xerces.internal.impl.dv.xs.DayDV;
 
 public class Person {
-	private int isinfected; //0 - safe 1 - infected 2- dead
+	private int isinfected; //0 - safe 1 - infected 2 - dead 3 - infected but can not spread
 	private Person[] childPerson;
 	private int day;
 	

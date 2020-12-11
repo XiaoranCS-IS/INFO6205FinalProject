@@ -22,6 +22,8 @@ public class CustomizeVirus {
 	public Virus v; 
 	private Label lblCure;
 	private Text text_3;
+	private Label lblD;
+	private Text text_4;
 
 	/**
 	 * Launch the application.
@@ -50,6 +52,7 @@ public class CustomizeVirus {
 	public Virus creatVirus() {
 		Virus virus =new Virus();
 		virus.setVirusName(this.text.getText());
+		virus.setDeathRate(Double.valueOf(this.text_4.getText()));
 		virus.setkFac(Double.valueOf(this.text_1.getText()));
 		virus.setrFac(Double.valueOf(this.text_2.getText()));
 		virus.setCureRate(Double.valueOf(this.text_3.getText()));
@@ -63,7 +66,7 @@ public class CustomizeVirus {
 	 */
 	protected void createContents() {
 		shlCreateVirus = new Shell();
-		shlCreateVirus.setSize(230, 302);
+		shlCreateVirus.setSize(230, 366);
 		shlCreateVirus.setText("Create Virus");
 		
 		Label lblVirusName = new Label(shlCreateVirus, SWT.NONE);
@@ -71,8 +74,8 @@ public class CustomizeVirus {
 		lblVirusName.setBounds(21, 20, 73, 17);
 		
 		Label lblk = new Label(shlCreateVirus, SWT.NONE);
-		lblk.setText("Death Rate:");
-		lblk.setBounds(21, 70, 91, 17);
+		lblk.setText("K Factor:");
+		lblk.setBounds(21, 220, 91, 17);
 		
 		Label lblR = new Label(shlCreateVirus, SWT.NONE);
 		lblR.setText("R Factor:");
@@ -82,7 +85,7 @@ public class CustomizeVirus {
 		text.setBounds(21, 40, 73, 23);
 		
 		text_1 = new Text(shlCreateVirus, SWT.BORDER);
-		text_1.setBounds(21, 90, 73, 23);
+		text_1.setBounds(21, 240, 73, 23);
 		
 		text_2 = new Text(shlCreateVirus, SWT.BORDER);
 		text_2.setBounds(21, 190, 73, 23);
@@ -97,18 +100,19 @@ public class CustomizeVirus {
 					Double.valueOf(text_1.getText());
 					Double.valueOf(text_2.getText());
 					Double.valueOf(text_3.getText());	
+					Double.valueOf(text_4.getText());
 					
 					can=true;
 				} catch (Exception e1) {
 					MessageBox mBox3= new MessageBox(shlCreateVirus, SWT.ICON_ERROR);
 					mBox3.setText("Wrong Type");
-					mBox3.setMessage("R Factor, Death Rate and Cure Rate must be the number");
+					mBox3.setMessage("R Factor, K Factor, Death Rate and Cure Rate must be the number");
 					mBox3.open();
 					// TODO: handle exception
 				}
 				try
 				{
-					if(Double.valueOf(text_1.getText())>1 ||Double.valueOf(text_1.getText())<0||Double.valueOf(text_3.getText())>1||Double.valueOf(text_3.getText())<0)
+					if(Double.valueOf(text_1.getText())>1 ||Double.valueOf(text_1.getText())<0||Double.valueOf(text_3.getText())>1||Double.valueOf(text_3.getText())<0||Double.valueOf(text_4.getText())<0||Double.valueOf(text_4.getText())>1)
 					{				
 						throw new Exception();
 					}
@@ -116,7 +120,7 @@ public class CustomizeVirus {
 				}catch (Exception e2) {
 					MessageBox mBox1= new MessageBox(shlCreateVirus, SWT.ICON_ERROR);
 						mBox1.setText("Wrong Value");
-						mBox1.setMessage("Death Rate and Cure Rate must be in the range (0-1)");
+						mBox1.setMessage("K Factor, Death Rate and Cure Rate must be in the range (0-1)");
 						mBox1.open();
 				}
 				
@@ -128,7 +132,7 @@ public class CustomizeVirus {
 			}
 		});
 		ButtonFinish.setText("OK");
-		ButtonFinish.setBounds(110, 222, 80, 27);
+		ButtonFinish.setBounds(111, 285, 80, 27);
 		
 		lblCure = new Label(shlCreateVirus, SWT.NONE);
 		lblCure.setBounds(21, 120, 61, 17);
@@ -136,6 +140,13 @@ public class CustomizeVirus {
 		
 		text_3 = new Text(shlCreateVirus, SWT.BORDER);
 		text_3.setBounds(21, 140, 73, 23);
+		
+		lblD = new Label(shlCreateVirus, SWT.NONE);
+		lblD.setBounds(21, 70, 59, 14);
+		lblD.setText("Death Rate:");
+		
+		text_4 = new Text(shlCreateVirus, SWT.BORDER);
+		text_4.setBounds(21, 90, 73, 23);
 
 	}
 }

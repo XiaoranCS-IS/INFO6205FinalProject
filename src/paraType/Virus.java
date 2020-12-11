@@ -3,6 +3,7 @@ package paraType;
 public class Virus {
 	private String VirusName;
 	private double CureRate;
+	private double DeathRate;
 	private double kFac;
 	private double rFac;
 	
@@ -11,12 +12,19 @@ public class Virus {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Virus(String virusName, double kFac,double cure, double rFac ) {
+	public Virus(String virusName, double Dea,double cure, double rFac, double kFac) {
 		super();
 		VirusName = virusName;
+		this.DeathRate=Dea;
 		this.CureRate=cure;
 		this.kFac = kFac;
 		this.rFac = rFac;
+	}
+	public double getDeathRate() {
+		return DeathRate;
+	}
+	public void setDeathRate(double deathRate) {
+		DeathRate = deathRate;
 	}
 	public double getkFac() {
 		return kFac;

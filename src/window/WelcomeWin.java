@@ -58,6 +58,10 @@ public class WelcomeWin {
 	    });
 	    btnSiM.setBounds(250, 162, 128, 41);
 	    btnSiM.setText("Begin Simulation");
+	    
+	    Label lblDesigner = new Label(shell, SWT.NONE);
+	    lblDesigner.setBounds(180, 327, 301, 35);
+	    lblDesigner.setText("Designer：Xiaoran Li,  Chenghuan Li,  Ruizhe Zhang");
 	    while(shell.getAlpha()<255){
 		    shell.setAlpha(alpha++);
 		    try {
@@ -102,11 +106,6 @@ public class WelcomeWin {
 		});
 		btnNewButton_2.setBounds(250, 232, 128, 41);
 		btnNewButton_2.setText("Exit");
-		
-		Button btnNewButton_3 = new Button(shell, SWT.NONE);
-		btnNewButton_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		btnNewButton_3.setBounds(250, 302, 128, 41);
-		btnNewButton_3.setText("Designer");
 		//lblNewLabel.setText("New Label");
 
 	}
